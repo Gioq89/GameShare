@@ -1,0 +1,22 @@
+{
+  "name": "gamer-profile",
+  "version": "1.0.0",
+  "description": "Connecting free-to-play gamers with other gamers",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "Group 2",
+  "license": "n/a",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "connect-session-sequelize": "^7.1.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.3",
+    "express-session": "^1.17.2",
+    "mysql2": "^2.3.0",
+    "sequelize": "^6.6.2"
+  }
+}
