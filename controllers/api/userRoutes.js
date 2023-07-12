@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User } = require("../../models");
+const { User, Game, UserGames } = require("../../models");
 const withAuth = require("../../utils/auth");
 
 // CREATE new user
@@ -32,6 +32,11 @@ router.get("/:username", async (req, res) => {
         username: req.params.username,
       },
       attributes: { exclude: "password" },
+      include: {
+        model: Game,
+        as: "user_games",
+        through: UserGames,
+      },
     });
 
     const user = userData.get({ plain: true });
@@ -48,7 +53,7 @@ router.put("/:id", async (req, res) => {
   try {
     const userData = await User.update(
       {
-        interestedGenres: req.body.user_genres,
+        interestedGenre: req.body.user_genre,
         preferredPlatform: req.body.user_platform,
         aboutMe: req.body.user_bio,
       },
@@ -72,9 +77,9 @@ router.get("/genre/:genre", async (req, res) => {
   try {
     const userData = await User.findAll({
       where: {
-        interestedGenres: req.params.genre,
+        interestedGenre: req.params.genre,
       },
-      attributes: ["id", "username", "interestedGenres"],
+      attributes: ["id", "username", "interestedGenre"],
     });
 
     res.status(200).json(userData);

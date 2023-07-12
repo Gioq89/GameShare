@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
       },
       {
         where: {
-          gameUser_id: req.session.user_id,
+          id: req.session.id,
         },
       }
     );
@@ -34,7 +34,7 @@ router.get("/", async (req, res) => {
         "interestedGenres",
         "preferredPlatform",
         "aboutMe",
-        // "topGame_id",
+        // "user_games",
         // "friend_id",
       ],
     });
@@ -55,26 +55,18 @@ router.get("/", async (req, res) => {
 // gets any user's profile
 router.get("/:username", async (req, res) => {
   try {
-    const gameData = await Game.findByPk(
-      req.params.username,
-      {
-        attributes: [
-          "id",
-          "game_title",
-          "game_genre",
-          "game_platform",
-          "game_url",
-          "game_thumbnail",
-        ],
-      },
-      {
-        where: {
-          gameUser_id: req.params.user_id,
-        },
-      }
-    );
+    const gameData = await Game.findByPk(req.params.username, {
+      attributes: [
+        "id",
+        "game_title",
+        "game_genre",
+        "game_platform",
+        "game_url",
+        "game_thumbnail",
+      ],
+    });
 
-    const games = games.get({ plain: true });
+    const games = gameData.get({ plain: true });
 
     const userData = await User.findByPk(req.params.username, {
       attributes: [
@@ -82,7 +74,7 @@ router.get("/:username", async (req, res) => {
         "interestedGenres",
         "preferredPlatform",
         "aboutMe",
-        // "topGame_id",
+        // "user_games",
         // "friend_id",
       ],
     });
