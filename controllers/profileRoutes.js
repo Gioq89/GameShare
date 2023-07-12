@@ -31,7 +31,7 @@ router.get("/", async (req, res) => {
     const userData = await User.findByPk(req.session.username, {
       attributes: [
         "username",
-        "interestedGenres",
+        "interestedGenre",
         "preferredPlatform",
         "aboutMe",
         // "user_games",
@@ -71,7 +71,7 @@ router.get("/:username", async (req, res) => {
     const userData = await User.findByPk(req.params.username, {
       attributes: [
         "username",
-        "interestedGenres",
+        "interestedGenre",
         "preferredPlatform",
         "aboutMe",
         // "user_games",

@@ -24,6 +24,27 @@ router.post("/", async (req, res) => {
 
 // --------------------------------------------------------------------------
 // haven't added withAuth yet
+// GET all users
+router.get("/", async (req, res) => {
+  try {
+    const userData = await User.findAll({
+      attributes: { exclude: "password" },
+      include: {
+        model: Game,
+        as: "user_games",
+        through: UserGames,
+      },
+    });
+
+    const users = userData.map((user) => user.get({ plain: true }));
+
+    res.status(200).json(users);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 // GET a user by their username
 router.get("/:username", async (req, res) => {
   try {
