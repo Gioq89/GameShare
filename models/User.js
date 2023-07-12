@@ -41,7 +41,7 @@ User.init(
         len: [6],
       },
     },
-    interestedGenres: {
+    interestedGenre: {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: "N/A",
@@ -56,21 +56,6 @@ User.init(
       allowNull: false,
       defaultValue: "N/A",
     },
-    // references the games library IDs
-    // topGame_id: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false,
-    //   references: {
-    //     model: "game",
-    //     key: "id",
-    //   },
-    //   defaultValue: 0,
-    // },
-    // references the IDs of the user's friends
-    // friend_id: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: true,
-    // },
   },
 
   // creates a hook that runs before the new User is stored
