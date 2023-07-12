@@ -22,6 +22,86 @@ router.post("/", async (req, res) => {
   }
 });
 
+// --------------------------------------------------------------------------
+// haven't added withAuth yet
+// GET a user by their username
+router.get("/:username", async (req, res) => {
+  try {
+    const userData = await User.findOne({
+      where: {
+        username: req.params.username,
+      },
+      attributes: { exclude: "password" },
+    });
+
+    const user = userData.get({ plain: true });
+
+    res.status(200).json(user);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// UPDATE current user's information (what genres they are interested in, the platform they play on, their bio)
+router.put("/:id", async (req, res) => {
+  try {
+    const userData = await User.update(
+      {
+        interestedGenres: req.body.user_genres,
+        preferredPlatform: req.body.user_platform,
+        aboutMe: req.body.user_bio,
+      },
+      {
+        where: {
+          // change this to req.params.user_id once logged in
+          id: req.params.id,
+        },
+      }
+    );
+
+    res.status(200).json(userData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// GET users by what their interested genre of game is
+router.get("/genre/:genre", async (req, res) => {
+  try {
+    const userData = await User.findAll({
+      where: {
+        interestedGenres: req.params.genre,
+      },
+      attributes: ["id", "username", "interestedGenres"],
+    });
+
+    res.status(200).json(userData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// GET users by what their interested genre of game is
+router.get("/platform/:platform", async (req, res) => {
+  try {
+    const userData = await User.findAll({
+      where: {
+        preferredPlatform: req.params.platform,
+      },
+      attributes: ["id", "username", "preferred_platform"],
+    });
+
+    res.status(200).json(userData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+// --------------------------------------------------------------------------
+
 // Login
 router.post("/login", async (req, res) => {
   try {
