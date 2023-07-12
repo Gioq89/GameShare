@@ -69,12 +69,7 @@ User.init(
     // references the IDs of the user's friends
     // friend_id: {
     //   type: DataTypes.INTEGER,
-    //   allowNull: false,
-    //   references: {
-    //     model: "friend",
-    //     key: "id",
-    //   },
-    //   defaultValue: 0,
+    //   allowNull: true,
     // },
   },
 

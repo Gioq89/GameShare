@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Game, Friend, User } = require("../models");
+const { Game, User } = require("../models");
 const withAuth = require("../utils/auth");
 
 // ---------------------------------------------------------------
