@@ -30,7 +30,7 @@ const seedDatabase = async () => {
     console.log("Database seeded successfully!");
 
     process.exit(0);
-  } catch (err) {
+  } catch (error) {
     console.log("Error seeding database", error);
     process.exit(1);
   }
