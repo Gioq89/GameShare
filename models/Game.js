@@ -26,7 +26,7 @@ Game.init(
       allowNull: false,
     },
     game_description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT("long"),
       allowNull: false,
     },
     game_url: {
