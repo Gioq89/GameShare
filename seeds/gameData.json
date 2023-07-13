@@ -1,0 +1,27 @@
+[
+    {
+      "game_title": "Game 1",
+      "game_genre": "Action",
+      "game_platform": "PC",
+      "game_description": "Description of Game 1",
+      "game_url": "https://example.com/game1",
+      "game_thumbnail": "https://example.com/game1-thumbnail.jpg"
+    },
+    {
+      "game_title": "Game 2",
+      "game_genre": "RPG",
+      "game_platform": "PlayStation",
+      "game_description": "Description of Game 2",
+      "game_url": "https://example.com/game2",
+      "game_thumbnail": "https://example.com/game2-thumbnail.jpg"
+    },
+    {
+      "game_title": "Game 3",
+      "game_genre": "Strategy",
+      "game_platform": "Xbox",
+      "game_description": "Description of Game 3",
+      "game_url": "https://example.com/game3",
+      "game_thumbnail": "https://example.com/game3-thumbnail.jpg"
+    }
+  ]
+  

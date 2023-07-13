@@ -1,0 +1,26 @@
+[
+  {
+    "username": "john_doe",
+    "email": "john@example.com",
+    "password": "password123",
+    "interestedGenre": "Action",
+    "preferredPlatform": "PC",
+    "aboutMe": "I love playing action games on PC."
+  },
+  {
+    "username": "jane_smith",
+    "email": "jane@example.com",
+    "password": "password456",
+    "interestedGenre": "RPG",
+    "preferredPlatform": "PlayStation",
+    "aboutMe": "I enjoy playing RPGs on PlayStation consoles."
+  },
+  {
+    "username": "joe_bloggs",
+    "email": "joe@example.com",
+    "password": "password789",
+    "interestedGenre": "Sports",
+    "preferredPlatform": "Xbox",
+    "aboutMe": "I like playing sports games on Xbox consoles."
+  }
+]
