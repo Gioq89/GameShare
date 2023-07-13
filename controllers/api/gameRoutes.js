@@ -111,6 +111,27 @@ router.get("/id/:id", async (req, res) => {
   }
 });
 
+// GET games by game name
+router.get("/:game", async (req, res) => {
+  try {
+    const gameData = await Game.findAll({
+      // Op.like checks for if game_title contains the params input of game
+      // deals with cases where games may have similar titles/user may not know full name
+      where: {
+        game_title: {
+          [Op.like]: `%${req.params.game}%`,
+        },
+      },
+    });
+
+    const games = gameData.map((game) => game.get({ plain: true }));
+
+    res.status(200).json(games);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 // GET games by platform
 router.get("/platform/:platform", async (req, res) => {
   try {
@@ -150,37 +171,34 @@ router.get("/category/:category", async (req, res) => {
 });
 
 // POST a game to a user's game list once they choose to add it
-// router.post("/:username/add/:id", async (req, res) => {
-//   try {
-//     const game_id = req.params.id;
+router.post("/:username/add/:id", async (req, res) => {
+  try {
+    const gameData = await Game.findByPk(req.params.id);
 
-//     const response = await axios.get(
-//       `http://www.freetogame.com/api/game?id=${game_id}`
-//     );
-//     const game = response.data.id;
+    const game = gameData.get({ plain: true });
 
-//     // change to req.session.username
-//     const user = await User.findOne({
-//       where: {
-//         username: req.params.username,
-//       },
-//       attributes: ["id", "username"],
-//       include: {
-//         model: Game,
-//         as: "user_games",
-//         through: UserGames,
-//       },
-//     });
+    // change to req.session.username
+    const user = await User.findOne({
+      where: {
+        username: req.params.username,
+      },
+      attributes: ["id", "username"],
+      include: {
+        model: Game,
+        as: "user_games",
+        through: UserGames,
+      },
+    });
 
-//     const gameData = await UserGames.create({
-//       user_id: user.id,
-//       game_id: game.id,
-//     });
+    const gameInfo = await UserGames.create({
+      user_id: user.id,
+      game_id: game.id,
+    });
 
-//     res.json(gameData);
-//   } catch (error) {
-//     res.status(500).json(error);
-//   }
-// });
+    res.json(gameInfo);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
 module.exports = router;
