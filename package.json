@@ -4,7 +4,8 @@
   "description": "Connecting free-to-play gamers with other gamers",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "Group 2",
@@ -19,5 +20,9 @@
     "express-session": "^1.17.2",
     "mysql2": "^2.3.0",
     "sequelize": "^6.6.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.44.0",
+    "prettier": "^3.0.0"
   }
 }

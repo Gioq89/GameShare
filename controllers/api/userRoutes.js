@@ -1,9 +1,9 @@
-const router = require("express").Router();
-const { User, Game, UserGames } = require("../../models");
-const withAuth = require("../../utils/auth");
+const router = require('express').Router();
+const { User, Game, UserGames } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // CREATE new user
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const dbUserData = await User.create({
       username: req.body.username,
@@ -25,13 +25,13 @@ router.post("/", async (req, res) => {
 // --------------------------------------------------------------------------
 // haven't added withAuth yet
 // GET all users
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const userData = await User.findAll({
-      attributes: { exclude: "password" },
+      attributes: { exclude: 'password' },
       include: {
         model: Game,
-        as: "user_games",
+        as: 'user_games',
         through: UserGames,
       },
     });
@@ -46,16 +46,16 @@ router.get("/", async (req, res) => {
 });
 
 // GET a user by their username
-router.get("/:username", async (req, res) => {
+router.get('/:username', async (req, res) => {
   try {
     const userData = await User.findOne({
       where: {
         username: req.params.username,
       },
-      attributes: { exclude: "password" },
+      attributes: { exclude: 'password' },
       include: {
         model: Game,
-        as: "user_games",
+        as: 'user_games',
         through: UserGames,
       },
     });
@@ -70,7 +70,7 @@ router.get("/:username", async (req, res) => {
 });
 
 // UPDATE current user's information (what genres they are interested in, the platform they play on, their bio)
-router.put("/:id", async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const userData = await User.update(
       {
@@ -83,7 +83,7 @@ router.put("/:id", async (req, res) => {
           // change this to req.params.user_id once logged in
           id: req.params.id,
         },
-      }
+      },
     );
 
     res.status(200).json(userData);
@@ -94,13 +94,13 @@ router.put("/:id", async (req, res) => {
 });
 
 // GET users by what their interested genre of game is
-router.get("/genre/:genre", async (req, res) => {
+router.get('/genre/:genre', async (req, res) => {
   try {
     const userData = await User.findAll({
       where: {
         interestedGenre: req.params.genre,
       },
-      attributes: ["id", "username", "interestedGenre"],
+      attributes: ['id', 'username', 'interestedGenre'],
     });
 
     res.status(200).json(userData);
@@ -111,13 +111,13 @@ router.get("/genre/:genre", async (req, res) => {
 });
 
 // GET users by what their interested genre of game is
-router.get("/platform/:platform", async (req, res) => {
+router.get('/platform/:platform', async (req, res) => {
   try {
     const userData = await User.findAll({
       where: {
         preferredPlatform: req.params.platform,
       },
-      attributes: ["id", "username", "preferred_platform"],
+      attributes: ['id', 'username', 'preferred_platform'],
     });
 
     res.status(200).json(userData);
@@ -129,7 +129,7 @@ router.get("/platform/:platform", async (req, res) => {
 // --------------------------------------------------------------------------
 
 // Login
-router.post("/login", async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     const dbUserData = await User.findOne({
       where: {
@@ -140,7 +140,7 @@ router.post("/login", async (req, res) => {
     if (!dbUserData) {
       res
         .status(400)
-        .json({ message: "Incorrect email or password. Please try again!" });
+        .json({ message: 'Incorrect email or password. Please try again!' });
       return;
     }
 
@@ -149,7 +149,7 @@ router.post("/login", async (req, res) => {
     if (!validPassword) {
       res
         .status(400)
-        .json({ message: "Incorrect email or password. Please try again!" });
+        .json({ message: 'Incorrect email or password. Please try again!' });
       return;
     }
 
@@ -158,7 +158,7 @@ router.post("/login", async (req, res) => {
 
       res
         .status(200)
-        .json({ user: dbUserData, message: "You are now logged in!" });
+        .json({ user: dbUserData, message: 'You are now logged in!' });
     });
   } catch (err) {
     console.log(err);
@@ -167,7 +167,7 @@ router.post("/login", async (req, res) => {
 });
 
 // Logout
-router.post("/logout", (req, res) => {
+router.post('/logout', (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
       res.status(204).end();
