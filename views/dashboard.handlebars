@@ -1,9 +1,14 @@
-{{#each games as |game|}}
-  <div>
-    <h3>{{game_title}}</h3>
-    <p>{{game_description}}</p>
-    <a href="/dashboard/{{id}}">
-    <img src="{{game_thumbnail}}">
-    </a>
+<div class="container">
+  <h1 class="title has-text-centered">Explore Free To Play Games</h1>
+  <div class="columns is-multiline is-flex is-justify-content-center">
+    {{#each games as |game|}}
+    <div class="column is-one-third">
+      <a href="/dashboard/{{id}}">
+        <img src="{{game_thumbnail}}">
+      </a>
+      <h3 class="title is-5 has-text-weight-bold">{{game_title}}</h3>
+      <p class="mr-5">{{game_description}}</p>
+    </div>
+    {{/each}}
   </div>
-{{/each}}
+</div>
