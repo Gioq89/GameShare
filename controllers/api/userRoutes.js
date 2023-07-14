@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const { User, Game, UserGames } = require("../../models");
+const { User, Game, UserGames, Friend, UserFriends } = require("../../models");
 const withAuth = require("../../utils/auth");
 
-// CREATE new user
+// CREATE new user and add user to friend table to assign friend id
 router.post("/", async (req, res) => {
   try {
     const dbUserData = await User.create({
@@ -11,10 +11,14 @@ router.post("/", async (req, res) => {
       password: req.body.password,
     });
 
+    const dbFriendData = await Friend.create({
+      username: req.body.username,
+    });
+
     req.session.save(() => {
       req.session.loggedIn = true;
 
-      res.status(200).json(dbUserData);
+      res.status(200).json({ dbUserData, dbFriendData });
     });
   } catch (err) {
     console.log(err);
@@ -29,11 +33,18 @@ router.get("/", async (req, res) => {
   try {
     const userData = await User.findAll({
       attributes: { exclude: "password" },
-      include: {
-        model: Game,
-        as: "user_games",
-        through: UserGames,
-      },
+      include: [
+        {
+          model: Game,
+          as: "user_games",
+          through: UserGames,
+        },
+        {
+          model: Friend,
+          as: "user_friends",
+          through: UserFriends,
+        },
+      ],
     });
 
     const users = userData.map((user) => user.get({ plain: true }));
@@ -53,11 +64,18 @@ router.get("/:username", async (req, res) => {
         username: req.params.username,
       },
       attributes: { exclude: "password" },
-      include: {
-        model: Game,
-        as: "user_games",
-        through: UserGames,
-      },
+      include: [
+        {
+          model: Game,
+          as: "user_games",
+          through: UserGames,
+        },
+        {
+          model: Friend,
+          as: "user_friends",
+          through: UserFriends,
+        },
+      ],
     });
 
     const user = userData.get({ plain: true });
@@ -126,6 +144,52 @@ router.get("/platform/:platform", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+// POST a user to the current user's friends list
+router.post("/:user/add/:friend", async (req, res) => {
+  try {
+    const friendData = await Friend.findOne({
+      where: {
+        username: req.params.friend,
+      },
+    });
+
+    const friend = friendData.get({ plain: true });
+
+    const user = await User.findOne({
+      where: {
+        username: req.params.user,
+      },
+      attributes: ["id", "username"],
+      include: {
+        model: Friend,
+        as: "user_friends",
+        through: UserFriends,
+      },
+    });
+
+    // add a friend id to the user's friends list
+    const user_to_friend = await UserFriends.create({
+      user_id: user.id,
+      friend_id: friend.id,
+    });
+
+    // add a user's id to their friend's friends list
+    const friend_to_user = await UserFriends.create({
+      user_id: friend.id,
+      friend_id: user.id,
+    });
+
+    res.json({
+      message: `${user.username} and ${friend.username} are now friends!`,
+      user_to_friend,
+      friend_to_user,
+    });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 // --------------------------------------------------------------------------
 
 // Login
