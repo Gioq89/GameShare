@@ -26,7 +26,7 @@ Game.init(
       allowNull: false,
     },
     game_description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT("long"),
       allowNull: false,
     },
     game_url: {
@@ -36,14 +36,6 @@ Game.init(
     game_thumbnail: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    gameUser_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: "user",
-        key: "id",
-      },
     },
   },
   {
