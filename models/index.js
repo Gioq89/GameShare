@@ -1,7 +1,9 @@
 // import the models
-const User = require('./User');
-const Game = require('./Game');
-const UserGames = require('./UserGames');
+const User = require("./User");
+const Game = require("./Game");
+const UserGames = require("./UserGames");
+const Friend = require("./Friend");
+const UserFriends = require("./UserFriends");
 
 // associations not working, need to fix
 
@@ -19,5 +21,19 @@ Game.belongsToMany(User, {
   foreignKey: 'game_id',
 });
 
+// a user can be friends with many other users
+User.belongsToMany(Friend, {
+  through: UserFriends,
+  as: "user_friends",
+  foreignKey: "user_id",
+});
+
+// a user can be friends with many other users
+Friend.belongsToMany(User, {
+  through: UserFriends,
+  as: "friend_users",
+  foreignKey: "friend_id",
+});
+
 // export the model associations
-module.exports = { User, Game, UserGames };
+module.exports = { User, Game, UserGames, Friend, UserFriends };
