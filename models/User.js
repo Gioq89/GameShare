@@ -1,7 +1,7 @@
 // import bcrypt, sequelize objects
-const sequelize = require("../config/connection");
-const bcrypt = require("bcrypt");
-const { Model, DataTypes } = require("sequelize");
+const sequelize = require('../config/connection');
+const bcrypt = require('bcrypt');
+const { Model, DataTypes } = require('sequelize');
 
 // create User class that includes checkPassword function
 class User extends Model {
@@ -44,17 +44,17 @@ User.init(
     interestedGenre: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "N/A",
+      defaultValue: 'N/A',
     },
     preferredPlatform: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "N/A",
+      defaultValue: 'N/A',
     },
     aboutMe: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "N/A",
+      defaultValue: 'N/A',
     },
   },
 
@@ -70,7 +70,7 @@ User.init(
       async beforeUpdate(updatedUserData) {
         updatedUserData.password = await bcrypt.hash(
           updatedUserData.password,
-          10
+          10,
         );
         return updatedUserData;
       },
@@ -79,8 +79,8 @@ User.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "user",
-  }
+    modelName: 'user',
+  },
 );
 
 module.exports = User;

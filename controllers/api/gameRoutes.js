@@ -1,14 +1,14 @@
-const router = require("express").Router();
-const withAuth = require("../../utils/auth");
+const router = require('express').Router();
+const withAuth = require('../../utils/auth');
 // import the axios package to help fetch data from the FreetoGame API
-const axios = require("axios");
-const { User, Game, UserGames } = require("../../models");
-const { Op } = require("sequelize");
+const axios = require('axios');
+const { User, Game, UserGames } = require('../../models');
+const { Op } = require('sequelize');
 
 // ----------------------------------------------------------------------------
 // STRICTLY THROUGH AXIOS (not stored in database; accessing API directly)
 // GET all games from the API
-router.get("/freetogame", async (req, res) => {
+router.get('/freetogame', async (req, res) => {
   try {
     const response = await axios.get(`http://www.freetogame.com/api/games`);
     const games_data = response.data;
@@ -20,10 +20,10 @@ router.get("/freetogame", async (req, res) => {
 });
 
 // GET single game by id from API
-router.get("/freetogame/id/:id", async (req, res) => {
+router.get('/freetogame/id/:id', async (req, res) => {
   try {
     const response = await axios.get(
-      `http://www.freetogame.com/api/game?id=${req.params.id}`
+      `http://www.freetogame.com/api/game?id=${req.params.id}`,
     );
     const game_data = response.data;
 
@@ -34,10 +34,10 @@ router.get("/freetogame/id/:id", async (req, res) => {
 });
 
 // GET games by platform from API
-router.get("/freetogame/platform/:platform", async (req, res) => {
+router.get('/freetogame/platform/:platform', async (req, res) => {
   try {
     const response = await axios.get(
-      `http://www.freetogame.com/api/games?platform=${req.params.platform}`
+      `http://www.freetogame.com/api/games?platform=${req.params.platform}`,
     );
     const games_data = response.data;
 
@@ -48,10 +48,10 @@ router.get("/freetogame/platform/:platform", async (req, res) => {
 });
 
 // GET games by category from API
-router.get("/freetogame/category/:category", async (req, res) => {
+router.get('/freetogame/category/:category', async (req, res) => {
   try {
     const response = await axios.get(
-      `http://www.freetogame.com/api/games?category=${req.params.category}`
+      `http://www.freetogame.com/api/games?category=${req.params.category}`,
     );
     const games_data = response.data;
 
@@ -64,7 +64,7 @@ router.get("/freetogame/category/:category", async (req, res) => {
 // ----------------------------------------------------------------------------
 // THROUGH DATABASE
 // POST games from API into database
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const response = await axios.get(`http://www.freetogame.com/api/games`);
     const games_data = response.data;
@@ -88,7 +88,7 @@ router.post("/", async (req, res) => {
 });
 
 //GET all games that are in the application database (stored from the API)
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const gameData = await Game.findAll();
 
@@ -101,7 +101,7 @@ router.get("/", async (req, res) => {
 });
 
 // GET single game by id
-router.get("/id/:id", async (req, res) => {
+router.get('/id/:id', async (req, res) => {
   try {
     const gameData = await Game.findByPk(req.params.id);
 
@@ -114,7 +114,7 @@ router.get("/id/:id", async (req, res) => {
 });
 
 // GET games by game name
-router.get("/:game", async (req, res) => {
+router.get('/:game', async (req, res) => {
   try {
     const gameData = await Game.findAll({
       // Op.like checks for if game_title contains the params input of game
@@ -135,7 +135,7 @@ router.get("/:game", async (req, res) => {
 });
 
 // GET games by platform
-router.get("/platform/:platform", async (req, res) => {
+router.get('/platform/:platform', async (req, res) => {
   try {
     const gameData = await Game.findAll({
       // Op.like checks for if game_platform contains the params input of platform
@@ -156,7 +156,7 @@ router.get("/platform/:platform", async (req, res) => {
 });
 
 // GET games by category
-router.get("/category/:category", async (req, res) => {
+router.get('/category/:category', async (req, res) => {
   try {
     const gameData = await Game.findAll({
       where: {
@@ -173,7 +173,7 @@ router.get("/category/:category", async (req, res) => {
 });
 
 // POST a game to a user's game list once they choose to add it
-router.post("/:username/add/:id", async (req, res) => {
+router.post('/:username/add/:id', async (req, res) => {
   try {
     const gameData = await Game.findByPk(req.params.id);
 
@@ -184,10 +184,10 @@ router.post("/:username/add/:id", async (req, res) => {
       where: {
         username: req.params.username,
       },
-      attributes: ["id", "username"],
+      attributes: ['id', 'username'],
       include: {
         model: Game,
-        as: "user_games",
+        as: 'user_games',
         through: UserGames,
       },
     });

@@ -1,5 +1,5 @@
-const sequelize = require("../config/connection");
-const { Model, DataTypes } = require("sequelize");
+const sequelize = require('../config/connection');
+const { Model, DataTypes } = require('sequelize');
 
 // create Game class
 class Game extends Model {}
@@ -26,7 +26,7 @@ Game.init(
       allowNull: false,
     },
     game_description: {
-      type: DataTypes.TEXT("long"),
+      type: DataTypes.TEXT('long'),
       allowNull: false,
     },
     game_url: {
@@ -43,8 +43,8 @@ Game.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "game",
-  }
+    modelName: 'game',
+  },
 );
 
 module.exports = Game;

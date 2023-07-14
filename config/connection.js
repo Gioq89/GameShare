@@ -1,6 +1,6 @@
 // import sequelize and dotenv packages
-const Sequelize = require("sequelize");
-require("dotenv").config();
+const Sequelize = require('sequelize');
+require('dotenv').config();
 
 // create the sequelize object for exporting to server.js
 let sequelize;
@@ -14,10 +14,10 @@ if (process.env.JAWSDB_URL) {
     process.env.DB_USER,
     process.env.DB_PASSWORD,
     {
-      host: "localhost",
-      dialect: "mysql",
+      host: 'localhost',
+      dialect: 'mysql',
       port: 3306,
-    }
+    },
   );
 }
 
