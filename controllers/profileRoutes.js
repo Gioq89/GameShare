@@ -1,90 +1,39 @@
 const router = require('express').Router();
-const { Game, User } = require('../models');
+const { Game, User, Friend, UserGames, UserFriends } = require('../models');
 const withAuth = require('../utils/auth');
 
 // ---------------------------------------------------------------
-// brainstorming; need to rearrange a lot of variables/work on logic
-
-// gets all games/user information that are stored for the user
-router.get('/', async (req, res) => {
-  try {
-    const gameData = await Game.findAll(
-      {
-        attributes: [
-          'id',
-          'game_title',
-          'game_genre',
-          'game_platform',
-          'game_url',
-          'game_thumbnail',
-        ],
-      },
-      {
-        where: {
-          id: req.session.id,
-        },
-      },
-    );
-
-    const games = gameData.map((game) => game.get({ plain: true }));
-
-    const userData = await User.findByPk(req.session.username, {
-      attributes: [
-        'username',
-        'interestedGenre',
-        'preferredPlatform',
-        'aboutMe',
-        // "user_games",
-        // "friend_id",
-      ],
-    });
-
-    const userInfo = userData.map((user) => user.get({ plain: true }));
-
-    // render the homepage and pass that the user is logged in
-    res.render('profile', {
-      games,
-      userInfo,
-      logged_in: req.session.logged_in,
-    });
-  } catch (error) {
-    res.status(500).json(error);
-  }
-});
-
-// gets any user's profile
+// GET all games/user information that are stored for the user
 router.get('/:username', async (req, res) => {
   try {
-    const gameData = await Game.findByPk(req.params.username, {
-      attributes: [
-        'id',
-        'game_title',
-        'game_genre',
-        'game_platform',
-        'game_url',
-        'game_thumbnail',
+    const profileData = await User.findOne({
+      where: {
+        username: req.params.username,
+      },
+      attributes: { exclude: "password" },
+      include: [
+        {
+          model: Game,
+          as: "user_games",
+          through: UserGames,
+        },
+        {
+          model: Friend,
+          as: "user_friends",
+          through: UserFriends,
+        },
       ],
     });
 
-    const games = gameData.get({ plain: true });
-
-    const userData = await User.findByPk(req.params.username, {
-      attributes: [
-        'username',
-        'interestedGenre',
-        'preferredPlatform',
-        'aboutMe',
-        // "user_games",
-        // "friend_id",
-      ],
-    });
-
-    const userInfo = userData.map((user) => user.get({ plain: true }));
+    const profile = profileData.get({ plain: true });
+    const games = profile.user_games;
+    const friends = profile.user_friends;
 
     // render the homepage and pass that the user is logged in
     res.render('profile', {
+      ...profile,
       games,
-      userInfo,
+      friends,
       logged_in: req.session.logged_in,
     });
   } catch (error) {

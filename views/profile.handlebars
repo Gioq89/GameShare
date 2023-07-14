@@ -1,8 +1,35 @@
 <div class="hero is-fullheight">
     <div class="container">
-        <h2 class="title has-text-centered">User Profile</h2>
+        <h2 class="title has-text-centered">User Profile of {{username}}</h2>
         <div class="columns is-flex is-flex-direction-column box">
-            
+            <h2>About Me: {{aboutMe}}</h2>
+            <h2>My favorite genre of games is: {{interestedGenre}}</h2>
+            <h2>I play mainly on: {{preferredPlatform}}</h2>
+         
         </div>
+
+        <div class="columns is-flex is-flex-direction-column box">
+            <h1>Games I Play/Have Played</h1>
+            {{#each games as |game|}}
+            <div>
+                <h3>{{game_title}}</h3>
+                <p>{{game_description}}</p>
+                <a href="/dashboard/{{game_title}}">
+                <img src="{{game_thumbnail}}">
+                </a>
+            </div>
+            {{/each}}
+        </div>
+
+        <div class="columns is-flex is-flex-direction-column box">
+            <h1>My Friends</h1>
+            {{#each friends as |friend|}}
+            <div>
+                <a href="/profile/{{username}}">
+                <h3>{{username}}</h3>
+                </a>
+                </div>
+            </div>
+            {{/each}}
     </div>
 </div>
