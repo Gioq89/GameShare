@@ -1,0 +1,9 @@
+{{#each games as |game|}}
+  <div>
+    <h3>{{game_title}}</h3>
+    <p>{{game_description}}</p>
+    <a href="/dashboard/{{id}}">
+    <img src="{{game_thumbnail}}">
+    </a>
+  </div>
+{{/each}}
