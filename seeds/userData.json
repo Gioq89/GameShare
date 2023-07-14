@@ -1,26 +1,47 @@
 [
-  {
-    "username": "john_doe",
-    "email": "john@example.com",
-    "password": "password123",
-    "interestedGenre": "Action",
-    "preferredPlatform": "PC",
-    "aboutMe": "I love playing action games on PC."
+	{
+		"id": 1,
+		"username": "user1",
+		"email": "one@email.com",
+    "password": "gamer12345",
+		"interestedGenre": "shooter",
+		"preferredPlatform": "pc",
+		"aboutMe": "i love games"
+  },
+	{
+		"id": 2,
+		"username": "user2",
+		"email": "two@email.com",
+    "password": "gamer12345",
+		"interestedGenre": "shooter",
+		"preferredPlatform": "browser",
+		"aboutMe": "gaming is my passion"
+  },
+	{
+		"id": 3,
+		"username": "user3",
+		"email": "three@email.com",
+    "password": "gamer12345",
+		"interestedGenre": "sports",
+		"preferredPlatform": "pc",
+		"aboutMe": "gaming woohoo"
   },
   {
-    "username": "jane_smith",
-    "email": "jane@example.com",
-    "password": "password456",
-    "interestedGenre": "RPG",
-    "preferredPlatform": "PlayStation",
-    "aboutMe": "I enjoy playing RPGs on PlayStation consoles."
+		"id": 4,
+		"username": "user4",
+		"email": "four@email.com",
+    "password": "gamer12345",
+		"interestedGenre": "mmorpg",
+		"preferredPlatform": "pc",
+		"aboutMe": "games 4 life"
   },
   {
-    "username": "joe_bloggs",
-    "email": "joe@example.com",
-    "password": "password789",
-    "interestedGenre": "Sports",
-    "preferredPlatform": "Xbox",
-    "aboutMe": "I like playing sports games on Xbox consoles."
+		"id": 5,
+		"username": "user5",
+		"email": "five@email.com",
+    "password": "gamer12345",
+		"interestedGenre": "mmorpg",
+		"preferredPlatform": "browser",
+		"aboutMe": "i love free"
   }
 ]
