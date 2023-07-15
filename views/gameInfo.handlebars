@@ -1,8 +1,16 @@
 <div>
-    {{#each games as |game|}}
     <div>
-        <img src="{{game_thumbnail}}">
-        <h3>{{game_title}}</h3>
-        <p>{{game_description}}</p>
-    {{/each}}
+        <img src="{{game.game_thumbnail}}">
+        <a href="{{game.game_url}}">Click here to access the game's website to play!</a>
+        <button id="add-game">Add to Library</button>
+        <h3>{{game.game_title}}</h3>
+        <p>Developed by: {{info.developer}}</p>
+        <p>{{info.description}}</p>
+
+        <h1>Screenshots of Gameplay</h1>
+            {{#each screenshots as |screenshot|}}
+            <div>
+                <img src="{{image}}">
+            </div>
+            {{/each}}
 </div>

@@ -1,10 +1,22 @@
 [
   {
-    "game_id": 1,
+    "game_id": 55,
     "user_id": 1
   },
   {
-    "game_id": 2,
+    "game_id": 66,
+    "user_id": 2
+  },
+  {
+    "game_id": 77,
+    "user_id": 2
+  },
+  {
+    "game_id": 88,
+    "user_id": 2
+  },
+  {
+    "game_id": 99,
     "user_id": 2
   }
 ]
