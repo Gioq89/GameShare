@@ -1,17 +1,19 @@
 const router = require('express').Router();
 const { Game, User } = require('../models');
 const axios = require('axios');
+const shuffle = require('shuffle-array');
 const withAuth = require('../utils/auth');
 // --------------------------------------------------------------
 // GET all games and show them on the homepage
-router.get("/dashboard", async (req, res) => {
+router.get('/dashboard', async (req, res) => {
   try {
-    const gameData = await Game.findAll();
+    const gamesData = await Game.findAll();
 
-    const games = gameData.map((game) => game.get({ plain: true }));
+    const games_data = gamesData.map((game) => game.get({ plain: true }));
 
+    const games = shuffle(games_data);
     // render the homepage and pass that the user is logged in
-    res.render("dashboard", {
+    res.render('dashboard', {
       games,
       // logged_in: req.session.logged_in,
     });
@@ -20,15 +22,26 @@ router.get("/dashboard", async (req, res) => {
   }
 });
 
-// GET one game by clicking on it to get full info 
-router.get("/dashboard/games/:id", async (req, res) => {
+// GET one game by clicking on it to get full info
+router.get('/dashboard/games/:id', async (req, res) => {
   try {
     const gameData = await Game.findByPk(req.params.id, {
       where: {
-        id: req.params.id
-      }
+        id: req.params.id,
+      },
     });
     const game = gameData.get({ plain: true });
+
+    // // get username to associate who's library to add to if add game button is clicked
+    const userData = await User.findOne({
+      where: {
+        // username: req.session.username
+        username: 'user1',
+      },
+      attributes: ['username'],
+    });
+
+    const user = userData.get({ plain: true });
 
     // call in the API to get full info on a game (since this information is unable to be retrieved from the get all route for the local database)
     const response = await axios.get(
@@ -38,8 +51,9 @@ router.get("/dashboard/games/:id", async (req, res) => {
     const screenshots = info.screenshots;
 
     // render the homepage and pass that the user is logged in
-    res.render("gameInfo", {
+    res.render('gameInfo', {
       game,
+      user,
       info,
       screenshots,
       // logged_in: req.session.logged_in,
