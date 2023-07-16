@@ -1,0 +1,12 @@
+<div class="container">
+    {{> search-details}}
+
+    <h1 class="title has-text-centered">Showing {{number_of_results}} Results for '{{search}}'</h1>
+
+    <div class="columns is-multiline is-flex is-justify-content-center">
+      {{> games-details}}
+    </div>
+</div>
+
+<script src="/js/search-title.js"></script>
+<script src="/js/search-category.js"></script>

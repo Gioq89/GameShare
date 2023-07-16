@@ -63,11 +63,32 @@ router.get('/dashboard/games/:id', async (req, res) => {
   }
 });
 
+// GET the results from a search (either by title or category)
+router.get('/dashboard/search/:search', async (req, res) => {
+  try {
+    const search = req.params.search;
+    const results = req.query.results;
+
+    // need to revert the results query that was encoded back to a normal JSON string file
+    const games = JSON.parse(decodeURIComponent(results));
+    const number_of_results = games.length;
+
+    res.render('search-results', {
+      games,
+      search,
+      number_of_results,
+      logged_in: req.session.logged_in,
+    });
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 // redirect to the login page if the user is not logged in
 router.get('/login', (req, res) => {
   // if a session exists, redirect the user to the homepage; else redirect to login screen
   if (req.session.logged_in) {
-    res.redirect('/');
+    res.redirect('/dashboard');
     return;
   }
 
@@ -78,7 +99,7 @@ router.get('/login', (req, res) => {
 router.get('/signup', (req, res) => {
   // if a session exists, redirect the user to the homepage; else redirect to login screen
   if (req.session.logged_in) {
-    res.redirect('/');
+    res.redirect('/dashboard');
     return;
   }
 
