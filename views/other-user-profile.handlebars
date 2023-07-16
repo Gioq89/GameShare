@@ -1,0 +1,12 @@
+<div class="hero is-fullheight">
+    <div class="container">
+        <h2 class="title has-text-centered">User Profile of {{username}}</h2>
+        <div class="columns is-flex is-flex-direction-column box">
+            <button id="add-friend" class="button is-dark is-fullwidth">Connect!</button>
+            {{> profile-details}}
+        <input type="hidden" id="your_username" value="{{user.username}}">
+        <input type="hidden" id="friend_username" value="{{username}}">
+    </div>
+</div>
+
+<script src="/js/add-friend.js"></script>

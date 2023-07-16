@@ -1,9 +1,12 @@
 <div>
     <div>
+        <h1 class="title has-text-centered">{{game.game_title}}</h1>
         <img src="{{game.game_thumbnail}}">
-        <a href="{{game.game_url}}">Click here to access the game's website to play!</a>
-        <button id="add-game">Add to Library</button>
-        <h3>{{game.game_title}}</h3>
+        <a href="{{game.game_url}}">
+            <button class="button is-dark is-fullwidth">Visit Official Website</button>
+        </a>
+
+        <button id="add-game" class="button is-dark is-fullwidth">Add to Library</button>
         <p>Developed by: {{info.developer}}</p>
         <p>{{info.description}}</p>
 
@@ -13,4 +16,8 @@
                 <img src="{{image}}">
             </div>
             {{/each}}
+        
+        <input type="hidden" id="username" value="{{user.username}}">
 </div>
+
+<script src="/js/add-game.js"></script>
