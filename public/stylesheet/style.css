@@ -2,3 +2,11 @@
     font-family: 'Oxygen', sans-serif;
     font-family: 'VT323', monospace;
   }
+
+.game-font {
+  font-family: 'Press Start 2P', cursive;
+}
+
+.landing-page-title {
+  font-size: 10rem
+}

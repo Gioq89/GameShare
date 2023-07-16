@@ -4,6 +4,16 @@ const axios = require('axios');
 const shuffle = require('shuffle-array');
 const withAuth = require('../utils/auth');
 // --------------------------------------------------------------
+// GET the landing page for the website
+router.get('/', async (req, res) => {
+  try {
+    // render the landing page
+    res.render('landing-page');
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 // GET all games and show them on the homepage
 router.get('/dashboard', async (req, res) => {
   try {
