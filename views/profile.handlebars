@@ -2,6 +2,9 @@
     <div class="container">
         <h2 class="title has-text-centered">User Profile of {{username}}</h2>
         <div class="columns is-flex is-flex-direction-column box">
+            <a href="/profile/edit/{{username}}">
+            <button id="update-profile" class="button is-dark is-fullwidth">Update Profile</button>
+            </a>
             {{> profile-details}}
         <input type="hidden" id="username" value="{{username}}">
     </div>

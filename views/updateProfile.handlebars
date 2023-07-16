@@ -1,28 +1,73 @@
 <div class="hero is-fullheight">
     <div class="container">
-        <h2 class="title has-text-centered">User Profile</h2>
-        <div class="columns is-flex is-flex-direction-column box">
-        <div class="column">
-            <label for="name">Name</label>
-            <input class="input is-dark" type="text" placeholder="Ash Ketchum">
-        </div>
-        <div class="column">
-            <label for="Name">About Me</label>
-            <input class="input is-dark" type="text" placeholder="Bio">
-        </div>
-        <div class="column">
-            <label for="interestedGenres">Interested Genres</label>
-            <input class="input is-dark" type="text" placeholder="ex. Battle Royale, FPS, etc.">
-        </div>
-        <div class="column">
-            <label for="Name">Preferred Platform[s]</label>
-            <input class="input is-dark" type="text" placeholder="Mobile, Console, PC">
-        </div>
-        <div class="column">
-            <button class="button is-dark is-fullwidth" type="submit">Update Profile</button>
-        </div>
-        </div>
+        <form class="editProfile-form">
+        <h2 class="title has-text-centered">Update Your Profile</h2>
+            <div class="columns is-flex is-flex-direction-column box">
+                <div class="column">
+                    <label for="Name">About Me</label>
+                    <input class="input is-dark" id="about-me" type="text" placeholder="Bio">
+                </div>
+                
+                <div class="column">
+                    <label for="ganre">Interested Genre</label>
+                    <select id="genre">
+                        <option value="MMORPG">MMORPG</option>
+                        <option value="Shooter">Shooter</option>
+                        <option value="Strategy">Strategy</option>
+                        <option value="Racing">Racing</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Social">Social</option>
+                        <option value="Sandbox">Sandbox</option>
+                        <option value="Open-World">Open World</option>
+                        <option value="Survival">Survival</option>
+                        <option value="Horror">Horror</option>
+                        <option value="Voxel">Voxel</option>
+                        <option value="Zombie">Zombie</option>
+                        <option value="Turn-Based">Turn-based</option>
+                        <option value="First-Person">First-person</option>
+                        <option value="Third-Person">Third-person</option>
+                        <option value="Top-Down">Top-down</option>
+                        <option value="Tank">Tank</option>
+                        <option value="Space">Space</option>
+                        <option value="Sailing">Sailing</option>
+                        <option value="Side-Scroller">Side-Scroller</option>
+                        <option value="Superhero">Superhero</option>
+                        <option value="Permadeath">Permadeath</option>
+                        <option value="Card">Card</option>
+                        <option value="Battle-Royale">Battle Royale</option>
+                        <option value="MMOFPS">MMOFPS</option>
+                        <option value="MMORTS">MMORTS</option>
+                        <option value="MMOTPS">MMOTPS</option>
+                        <option value="Anime">Anime</option>
+                        <option value="Fantasy">Fantasy</option>
+                        <option value="Sci-Fi">Sci-fi</option>
+                        <option value="Fighting">Fighting</option>
+                        <option value="Action-RPG">Action-RPG</option>
+                        <option value="Military">Military</option>
+                        <option value="Martial-Arts">Martial Arts</option>
+                        <option value="Flight">Flight</option>
+                        <option value="Low-Spec">Low-spec</option>
+                        <option value="Tower-Defense">Tower Defense</option>
+                </select>
+                </div>
+
+                <div class="column">
+                    <label for="ganre">Preferred Platform</label>
+                    <select id="platform">
+                    <option value="PC">PC</option>
+                    <option value="Mobile">Mobile</option>
+                    <option value="Console">Console</option>
+                </select>
+                </div>
+
+                <div class="column">
+                    <button class="button is-dark is-fullwidth" type="submit">Update Profile</button>
+                </div>
+
+            </div>
+        </form>
+        <input type="hidden" id="username" value="{{username}}">
     </div>
 </div>
 
-<script src="></script>
+<script src="/js/update-info.js"></script>

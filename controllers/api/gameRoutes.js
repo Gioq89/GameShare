@@ -81,7 +81,7 @@ router.post('/', async (req, res) => {
       });
     }
 
-    res.status(200).json({ message: "Games successfully stored!" });
+    res.status(200).json({ message: 'Games successfully stored!' });
   } catch (error) {
     res.status(500).json(error);
   }
