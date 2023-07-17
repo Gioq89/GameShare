@@ -5,12 +5,12 @@
             <div class="columns is-flex is-flex-direction-column box">
                 <div class="column">
                     <label for="Name">About Me</label>
-                    <input class="input is-dark" id="about-me" type="text" placeholder="Bio">
+                    <input class="input is-dark" id="about-me" type="text" value="{{profile.aboutMe}}" placeholder="Bio">
                 </div>
-                
+
                 <div class="column">
-                    <label for="ganre">Interested Genre</label>
-                    <select id="genre">
+                    <label for="genre">Interested Genre</label>
+                    <select id="genre" value="{{profile.interestedGenre}}">
                         <option value="MMORPG">MMORPG</option>
                         <option value="Shooter">Shooter</option>
                         <option value="Strategy">Strategy</option>
@@ -52,8 +52,8 @@
                 </div>
 
                 <div class="column">
-                    <label for="ganre">Preferred Platform</label>
-                    <select id="platform">
+                    <label for="platform">Preferred Platform</label>
+                    <select id="platform" value="{{profile.preferredPlatform}}">
                     <option value="PC">PC</option>
                     <option value="Mobile">Mobile</option>
                     <option value="Console">Console</option>
@@ -66,7 +66,7 @@
 
             </div>
         </form>
-        <input type="hidden" id="username" value="{{username}}">
+        <input type="hidden" id="username" value={{profile.username}}>
     </div>
 </div>
 

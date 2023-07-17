@@ -93,10 +93,23 @@ router.get('/:username', async (req, res) => {
 // GET the edit profile page
 router.get('/edit/:username', async (req, res) => {
   try {
-    const username = req.params.username;
+    const profileData = await User.findOne({
+      where: {
+        //req.session.username
+        username: req.params.username,
+      },
+      attributes: [
+        'username',
+        'interestedGenre',
+        'preferredPlatform',
+        'aboutMe',
+      ],
+    });
+
+    const profile = profileData.get({ plain: true });
 
     res.render('updateProfile', {
-      username,
+      profile,
     });
   } catch (error) {
     res.status(500).json(error);
