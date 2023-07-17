@@ -1,10 +1,9 @@
-const router = require("express").Router();
-const { User, Game, UserGames, Friend, UserFriends } = require("../../models");
-const withAuth = require("../../utils/auth");
+const router = require('express').Router();
+const { User, Game, UserGames, Friend, UserFriends } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // CREATE new user and add user to friend table to assign friend id
-router.post("/", async (req, res) => {
-
+router.post('/', async (req, res) => {
   try {
     const dbUserData = await User.create({
       username: req.body.username,
@@ -33,16 +32,16 @@ router.post("/", async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const userData = await User.findAll({
-      attributes: { exclude: "password" },
+      attributes: { exclude: 'password' },
       include: [
         {
           model: Game,
-          as: "user_games",
+          as: 'user_games',
           through: UserGames,
         },
         {
           model: Friend,
-          as: "user_friends",
+          as: 'user_friends',
           through: UserFriends,
         },
       ],
@@ -64,16 +63,16 @@ router.get('/:username', async (req, res) => {
       where: {
         username: req.params.username,
       },
-      attributes: { exclude: "password" },
+      attributes: { exclude: 'password' },
       include: [
         {
           model: Game,
-          as: "user_games",
+          as: 'user_games',
           through: UserGames,
         },
         {
           model: Friend,
-          as: "user_friends",
+          as: 'user_friends',
           through: UserFriends,
         },
       ],
@@ -89,18 +88,18 @@ router.get('/:username', async (req, res) => {
 });
 
 // UPDATE current user's information (what genres they are interested in, the platform they play on, their bio)
-router.put('/:id', async (req, res) => {
+router.put('/:username', async (req, res) => {
   try {
     const userData = await User.update(
       {
-        interestedGenre: req.body.user_genre,
-        preferredPlatform: req.body.user_platform,
-        aboutMe: req.body.user_bio,
+        interestedGenre: req.body.genre,
+        preferredPlatform: req.body.platform,
+        aboutMe: req.body.aboutme,
       },
       {
         where: {
-          // change this to req.params.user_id once logged in
-          id: req.params.id,
+          // change to req.session.username
+          username: 'user1',
         },
       },
     );
@@ -147,7 +146,7 @@ router.get('/platform/:platform', async (req, res) => {
 });
 
 // POST a user to the current user's friends list
-router.post("/:user/add/:friend", async (req, res) => {
+router.post('/:user/add/:friend', async (req, res) => {
   try {
     const friendData = await Friend.findOne({
       where: {
@@ -161,10 +160,10 @@ router.post("/:user/add/:friend", async (req, res) => {
       where: {
         username: req.params.user,
       },
-      attributes: ["id", "username"],
+      attributes: ['id', 'username'],
       include: {
         model: Friend,
-        as: "user_friends",
+        as: 'user_friends',
         through: UserFriends,
       },
     });
