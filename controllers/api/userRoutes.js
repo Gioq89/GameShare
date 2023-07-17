@@ -128,7 +128,7 @@ router.get('/genre/:genre', async (req, res) => {
   }
 });
 
-// GET users by what their interested genre of game is
+// GET users by what their preferred platform is
 router.get('/platform/:platform', async (req, res) => {
   try {
     const userData = await User.findAll({
