@@ -33,20 +33,6 @@ router.get('/freetogame/id/:id', async (req, res) => {
   }
 });
 
-// GET games by platform from API
-router.get('/freetogame/platform/:platform', async (req, res) => {
-  try {
-    const response = await axios.get(
-      `http://www.freetogame.com/api/games?platform=${req.params.platform}`,
-    );
-    const games_data = response.data;
-
-    res.json(games_data);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-});
-
 // GET games by category from API
 router.get('/freetogame/category/:category', async (req, res) => {
   try {
@@ -122,27 +108,6 @@ router.get('/:game', async (req, res) => {
       where: {
         game_title: {
           [Op.like]: `%${req.params.game}%`,
-        },
-      },
-    });
-
-    const games = gameData.map((game) => game.get({ plain: true }));
-
-    res.status(200).json(games);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-});
-
-// GET games by platform
-router.get('/platform/:platform', async (req, res) => {
-  try {
-    const gameData = await Game.findAll({
-      // Op.like checks for if game_platform contains the params input of platform
-      // deals with cases where user types in 'pc' and find games with 'PC (Windows)'
-      where: {
-        game_platform: {
-          [Op.like]: `%${req.params.platform}%`,
         },
       },
     });

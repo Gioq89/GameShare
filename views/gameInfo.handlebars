@@ -1,23 +1,35 @@
 <div>
-    <div>
-        <h1 class="title has-text-centered">{{game.game_title}}</h1>
-        <img src="{{game.game_thumbnail}}">
-        <a href="{{game.game_url}}">
-            <button class="button is-dark is-fullwidth">Visit Official Website</button>
-        </a>
+  <h1 class="title has-text-centered is-size-2">{{game.game_title}}</h1>
+  <div class="columns">
+    <div class="column is-half">
+      <div class="game-thumbnail-container is-flex is-justify-content-center is-align-items-center" style="border: 2px solid #333; border-radius: 10px; padding: 10px;">
+        <img src="{{game.game_thumbnail}}" style="max-width: 100%; max-height: 100%;">
+      </div>
+    </div>
+    <div class="column is-half">
+      <div class="screenshots-container is-flex is-justify-content-center is-align-items-center" style="border: 2px solid #333; border-radius: 10px; padding: 10px;">
+        <div class="columns is-multiline">
+          {{#each screenshots as |screenshot|}}
+          <div class="column is-half">
+            <img src="{{screenshot.image}}">
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
 
-        <button id="add-game" class="button is-dark is-fullwidth">Add to Library</button>
-        <p>Developed by: {{info.developer}}</p>
-        <p>{{info.description}}</p>
+  <div class="game-description-container" style="margin: 20px; border: 2px solid #333; border-radius: 10px; padding: 10px;">
+    <p><span class="has-text-weight-bold has-text-dark">Developed by:</span> {{info.developer}}</p>
+    <br>
+    <p><span class="has-text-weight-bold has-text-dark">Description:</span> {{info.description}}</p>
+  </div>
 
-        <h1>Screenshots of Gameplay</h1>
-            {{#each screenshots as |screenshot|}}
-            <div>
-                <img src="{{image}}">
-            </div>
-            {{/each}}
-        
-        <input type="hidden" id="username" value="{{user.username}}">
+  <div class="buttons is-centered" style="margin-top: 20px;">
+    <a href="{{game.game_url}}">
+      <button class="button is-dark">Visit Official Website</button>
+    </a>
+    <button id="add-game" class="button is-dark">Add to Library</button>
+  </div>
+  <input type="hidden" id="username" value="{{user.username}}">
 </div>
-
-<script src="/js/add-game.js"></script>

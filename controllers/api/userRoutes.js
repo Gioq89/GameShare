@@ -128,7 +128,7 @@ router.get('/genre/:genre', async (req, res) => {
   }
 });
 
-// GET users by what their interested genre of game is
+// GET users by what their preferred platform is
 router.get('/platform/:platform', async (req, res) => {
   try {
     const userData = await User.findAll({
@@ -146,19 +146,11 @@ router.get('/platform/:platform', async (req, res) => {
 });
 
 // POST a user to the current user's friends list
-router.post('/:user/add/:friend', async (req, res) => {
+router.post('/:username/add/:friend', async (req, res) => {
   try {
-    const friendData = await Friend.findOne({
+    const friendData = await User.findOne({
       where: {
         username: req.params.friend,
-      },
-    });
-
-    const friend = friendData.get({ plain: true });
-
-    const user = await User.findOne({
-      where: {
-        username: req.params.user,
       },
       attributes: ['id', 'username'],
       include: {
@@ -168,23 +160,41 @@ router.post('/:user/add/:friend', async (req, res) => {
       },
     });
 
-    // add a friend id to the user's friends list
-    const user_to_friend = await UserFriends.create({
-      user_id: user.id,
-      friend_id: friend.id,
+    const friend = friendData.get({ plain: true });
+
+    const user = await User.findOne({
+      where: {
+        //username: req.session.username
+        username: req.params.username,
+      },
+      attributes: ['id', 'username'],
+      include: {
+        model: Friend,
+        as: 'user_friends',
+        through: UserFriends,
+      },
     });
 
-    // add a user's id to their friend's friends list
-    const friend_to_user = await UserFriends.create({
-      user_id: friend.id,
-      friend_id: user.id,
-    });
+    // ensure that user is not adding themself as a friend
+    if (friend.username !== user.username) {
+      // add a friend id to the user's friends list
+      const user_to_friend = await UserFriends.create({
+        user_id: user.id,
+        friend_id: friend.id,
+      });
 
-    res.json({
-      message: `${user.username} and ${friend.username} are now friends!`,
-      user_to_friend,
-      friend_to_user,
-    });
+      // add a user's id to their friend's friends list
+      const friend_to_user = await UserFriends.create({
+        user_id: friend.id,
+        friend_id: user.id,
+      });
+
+      res.json({
+        message: `${user.username} and ${friend.username} are now friends!`,
+        user_to_friend,
+        friend_to_user,
+      });
+    }
   } catch (error) {
     res.status(500).json(error);
   }
