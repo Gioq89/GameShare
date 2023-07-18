@@ -1,29 +1,45 @@
-    <h2>About Me: {{aboutMe}}</h2>
-        <h2>My favorite genre of games is: {{interestedGenre}}</h2>
-        <h2>I play mainly on: {{preferredPlatform}}</h2>
-        
-    </div>
+<div class="columns is-flex is-flex-direction-column box">
+  <div class="has-text-centered">
+    <h1 class="title is-4 has-text-weight-bold">About Me:</h1>
+    <h2>{{aboutMe}}</h2>
+  </div>
+  <div class="has-text-centered">
+    <h1 class="title is-4 has-text-weight-bold">Favorite Genre:</h1>
+    <h2>{{interestedGenre}}</h2>
+  </div>
+  <div class="has-text-centered">
+    <h1 class="title is-4 has-text-weight-bold">Preferred Platform:</h1>
+    <h2>{{preferredPlatform}}</h2>
+  </div>
+</div>
 
-    <div class="columns is-flex is-flex-direction-column box">
-        <h1>Games I Play/Have Played</h1>
-        {{#each games as |game|}}
+<div class="columns is-flex is-flex-direction-column box">
+  <div class="has-text-centered">
+    <h1 class="title is-4 has-text-weight-bold">Game Library:</h1>
+    <div class="columns is-multiline">
+      {{#each games as |game|}}
+      <div class="column is-half">
         <div>
-            <h3>{{game_title}}</h3>
-            <p>{{game_description}}</p>
-            <a href="/dashboard/games/{{id}}">
+          <a href="/dashboard/games/{{id}}">
             <img src="{{game_thumbnail}}">
-            </a>
+          </a>
+          <h3>{{game_title}}</h3>
         </div>
-        {{/each}}
+      </div>
+      {{/each}}
     </div>
+  </div>
+</div>
 
-    <div class="columns is-flex is-flex-direction-column box">
-        <h1>My Friends</h1>
-        {{#each friends as |friend|}}
-        <div>
-            <a href="/profile/{{username}}">
-            <h3>{{username}}</h3>
-            </a>
-            {{/each}}
-        </div>
+<div class="columns is-flex is-flex-direction-column box">
+  <div class="has-text-centered">
+    <h1 class="title is-4 has-text-weight-bold">My Friends</h1>
+    {{#each friends as |friend|}}
+    <div>
+      <a href="/profile/{{username}}">
+        <h3>{{username}}</h3>
+      </a>
     </div>
+    {{/each}}
+  </div>
+</div>
