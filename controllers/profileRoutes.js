@@ -77,14 +77,26 @@ router.get('/:username', async (req, res) => {
     });
     const user = userData.get({ plain: true });
 
-    // render a profile of other users
-    res.render('other-user-profile', {
-      ...profile,
-      games,
-      friends,
-      user,
-      logged_in: req.session.logged_in,
-    });
+    // if the current session username matches the user profile, go to current user's profile (so they can instead see edit profile vs connect button)
+    // if (profile.username == req.session.username) {
+    if (profile.username == 'user1') {
+      res.render('profile', {
+        ...profile,
+        games,
+        friends,
+        user,
+        logged_in: req.session.logged_in,
+      });
+    } else {
+      // render a profile of other users
+      res.render('other-user-profile', {
+        ...profile,
+        games,
+        friends,
+        user,
+        logged_in: req.session.logged_in,
+      });
+    }
   } catch (error) {
     res.status(500).json(error);
   }
