@@ -1,10 +1,9 @@
 const router = require('express').Router();
 const { Game, User, Friend, UserGames, UserFriends } = require('../models');
 const withAuth = require('../utils/auth');
-
 // ---------------------------------------------------------------
 // GET all games/user information that are stored for the user
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
   try {
     const profileData = await User.findOne({
       where: {
@@ -35,7 +34,7 @@ router.get('/', async (req, res) => {
       ...profile,
       games,
       friends,
-      logged_in: req.session.logged_in,
+      loggedIn: req.session.loggedIn,
     });
   } catch (error) {
     res.status(500).json(error);
@@ -43,7 +42,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET all games/user information that are stored for any user
-router.get('/:username', async (req, res) => {
+router.get('/:username', withAuth, async (req, res) => {
   try {
     const profileData = await User.findOne({
       where: {
@@ -85,7 +84,7 @@ router.get('/:username', async (req, res) => {
         games,
         friends,
         user,
-        logged_in: req.session.logged_in,
+        loggedIn: req.session.loggedIn,
       });
     } else {
       // render a profile of other users
@@ -94,7 +93,7 @@ router.get('/:username', async (req, res) => {
         games,
         friends,
         user,
-        logged_in: req.session.logged_in,
+        loggedIn: req.session.loggedIn,
       });
     }
   } catch (error) {
@@ -103,7 +102,7 @@ router.get('/:username', async (req, res) => {
 });
 
 // GET the edit profile page
-router.get('/edit/:username', async (req, res) => {
+router.get('/edit/:username', withAuth, async (req, res) => {
   try {
     const profileData = await User.findOne({
       where: {

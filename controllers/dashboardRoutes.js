@@ -3,9 +3,8 @@ const { Game, User } = require('../models');
 const axios = require('axios');
 const shuffle = require('shuffle-array');
 const withAuth = require('../utils/auth');
-
 // GET all games and show them on the dashboard page
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
   try {
     const gamesData = await Game.findAll();
 
@@ -19,7 +18,7 @@ router.get('/', async (req, res) => {
     // render the homepage and pass that the user is logged in
     res.render('dashboard', {
       games,
-      logged_in: req.session.logged_in,
+      loggedIn: req.session.loggedIn,
     });
   } catch (error) {
     res.status(500).json(error);
@@ -27,7 +26,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET one game by clicking on it to get full info
-router.get('/games/:id', async (req, res) => {
+router.get('/games/:id', withAuth, async (req, res) => {
   try {
     const gameData = await Game.findByPk(req.params.id, {
       where: {
@@ -60,7 +59,6 @@ router.get('/games/:id', async (req, res) => {
       user,
       info,
       screenshots,
-      // logged_in: req.session.logged_in,
     });
   } catch (error) {
     res.status(500).json(error);
@@ -68,7 +66,7 @@ router.get('/games/:id', async (req, res) => {
 });
 
 // GET the results from a search (either by title or category)
-router.get('/search/:search', async (req, res) => {
+router.get('/search/:search', withAuth, async (req, res) => {
   try {
     const search = req.params.search;
     const results = req.query.results;
@@ -81,7 +79,7 @@ router.get('/search/:search', async (req, res) => {
       games,
       search,
       number_of_results,
-      logged_in: req.session.logged_in,
+      loggedIn: req.session.loggedIn,
     });
   } catch (error) {
     res.status(500).json(error);
