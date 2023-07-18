@@ -17,6 +17,7 @@ router.post('/', async (req, res) => {
 
     req.session.save(() => {
       req.session.loggedIn = true;
+      req.session.username = dbUserData.username;
 
       res.status(200).json({ dbUserData, dbFriendData });
     });
@@ -98,8 +99,7 @@ router.put('/:username', async (req, res) => {
       },
       {
         where: {
-          // change to req.session.username
-          username: 'user1',
+          username: req.session.username,
         },
       },
     );
@@ -164,8 +164,8 @@ router.post('/:username/add/:friend', async (req, res) => {
 
     const user = await User.findOne({
       where: {
-        //username: req.session.username
-        username: req.params.username,
+        username: req.session.username,
+        // username: req.params.username,
       },
       attributes: ['id', 'username'],
       include: {

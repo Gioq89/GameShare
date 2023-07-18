@@ -8,8 +8,7 @@ router.get('/', async (req, res) => {
   try {
     const profileData = await User.findOne({
       where: {
-        username: 'user1',
-        // username: req.session.username,
+        username: req.session.username,
       },
       attributes: { exclude: 'password' },
       include: [
@@ -70,8 +69,7 @@ router.get('/:username', async (req, res) => {
 
     const userData = await User.findOne({
       where: {
-        // username: req.session.username
-        username: 'user1',
+        username: req.session.username,
       },
       attributes: ['username'],
     });
@@ -79,7 +77,7 @@ router.get('/:username', async (req, res) => {
 
     // if the current session username matches the user profile, go to current user's profile (so they can instead see edit profile vs connect button)
     // if (profile.username == req.session.username) {
-    if (profile.username == 'user1') {
+    if (profile.username == user.username) {
       res.render('profile', {
         ...profile,
         games,
@@ -107,8 +105,8 @@ router.get('/edit/:username', async (req, res) => {
   try {
     const profileData = await User.findOne({
       where: {
-        //req.session.username
-        username: req.params.username,
+        username: req.session.username,
+        // username: req.params.username,
       },
       attributes: [
         'username',
