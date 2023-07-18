@@ -25,9 +25,15 @@
     <p><span class="has-text-weight-bold has-text-dark">Description:</span> {{info.description}}</p>
   </div>
 
+  <p id="error" class="has-text-centered"></p>
+  <p id="success" class="has-text-centered"></p>
   <div class="buttons is-centered" style="margin-top: 20px;">
     <a href="{{game.game_url}}">
       <button class="button is-dark">Visit Official Website</button>
     </a>
     <button id="add-game" class="button is-dark">Add to Library</button>
-  </div
+  </div>
+
+  <input type="hidden" id="username" value="{{user.username}}">
+
+<script src="/js/add-game.js"></script>

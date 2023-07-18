@@ -32,7 +32,9 @@ const searchCategoryHandler = async (event) => {
           `/connect/search/${search}?results=${results_query}`,
         );
       } else {
-        alert('No users found with that genre interest! Please search again');
+        $('#error').text(
+          'No users found with that genre interest! Please search again',
+        );
       }
     } else {
       alert('Unable to search! Please try again.');
