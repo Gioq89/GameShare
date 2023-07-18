@@ -31,7 +31,9 @@ const searchPlatformHandler = async (event) => {
           `/connect/search/${search}?results=${results_query}`,
         );
       } else {
-        alert('No users found playing on that platform! Please search again');
+        $('#error').text(
+          'No users found playing on that platform! Please search again',
+        );
       }
     } else {
       alert('Unable to search! Please try again.');
