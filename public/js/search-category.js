@@ -19,7 +19,7 @@ const searchCategoryHandler = async (event) => {
       // only get the id, title, and thumbnail of the results (to shorten query)
       const game_info = results.map((result) => ({
         id: result.id,
-        game_title: result.title,
+        game_thumbnail: result.thumbnail,
       }));
 
       // need to encode the the results query for req.query in order to pass it to the handlebars route
