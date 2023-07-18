@@ -1,17 +1,17 @@
 <div>
-  <h1 class="title has-text-centered is-size-2">{{game.game_title}}</h1>
+  <h1 class="title has-text-centered is-size-1">{{game.game_title}}</h1>
   <div class="columns">
     <div class="column is-half">
-      <div class="game-thumbnail-container is-flex is-justify-content-center is-align-items-center" style="border: 2px solid #333; border-radius: 10px; padding: 10px;">
+      <div class="game-thumbnail-container is-flex is-justify-content-center is-align-items-center" style="border: 2px solid #333; border-radius: 10px; padding: 10px; margin: 20px;">
         <img src="{{game.game_thumbnail}}" style="max-width: 100%; max-height: 100%;">
       </div>
     </div>
     <div class="column is-half">
-      <div class="screenshots-container is-flex is-justify-content-center is-align-items-center" style="border: 2px solid #333; border-radius: 10px; padding: 10px;">
+      <div class="screenshots-container is-flex is-justify-content-center is-align-items-center" style="border: 2px solid #333; border-radius: 10px; padding: 10px; margin: 20px;">
         <div class="columns is-multiline">
           {{#each screenshots as |screenshot|}}
           <div class="column is-half">
-            <img src="{{screenshot.image}}">
+            <img src="{{screenshot.image}}" style="width: 100%; height: 100%;">
           </div>
           {{/each}}
         </div>
@@ -30,8 +30,4 @@
       <button class="button is-dark">Visit Official Website</button>
     </a>
     <button id="add-game" class="button is-dark">Add to Library</button>
-  </div>
-  <input type="hidden" id="username" value="{{user.username}}">
-</div>
-
-<script src="/js/add-game.js"></script>
+  </div

@@ -1,14 +1,24 @@
 <div class="container">
-  <h1 class="title has-text-centered">Explore Free To Play Games</h1>
-  
+  <h1 class="title has-text-centered is-size-1">Explore Free To Play Games</h1>
+
   {{> search-details}}
 
-  <a href="/dashboard">
-  <button class="button is-dark">Shuffle!</button>
-  </a>
-  
   <div class="columns is-multiline is-flex is-justify-content-center">
-    {{> games-details}}
+    {{#each games as |game|}}
+    <div class="column is-one-third mt-5">
+      <a href="/dashboard/games/{{id}}">
+        <img src="{{game_thumbnail}}">
+        <h3 class="title is-5 has-text-weight-bold">{{game_title}}</h3>
+      </a>
+      <p class="mr-6">{{game_description}}</p>
+    </div>
+    {{/each}}
+  </div>
+
+  <div class="buttons is-centered" style="margin-top: 20px; margin-bottom: 50px;">
+    <a href="/dashboard">
+      <button class="button is-dark">Shuffle</button>
+    </a>
   </div>
 </div>
 
