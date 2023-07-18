@@ -1,9 +1,9 @@
-<div class="columns is-flex is-flex-direction-column box">
-  <div class="has-text-centered">
+<div class="columns is-flex is-flex-direction-column box" style="border: 2px solid #333; border-radius: 10px;">
+  <div class="has-text-centered" style="margin-bottom: 20px;">
     <h1 class="title is-4 has-text-weight-bold">About Me:</h1>
     <h2>{{aboutMe}}</h2>
   </div>
-  <div class="has-text-centered">
+  <div class="has-text-centered" style="margin-bottom: 20px;">
     <h1 class="title is-4 has-text-weight-bold">Favorite Genre:</h1>
     <h2>{{interestedGenre}}</h2>
   </div>
@@ -13,13 +13,13 @@
   </div>
 </div>
 
-<div class="columns is-flex is-flex-direction-column box">
+<div class="columns is-flex is-flex-direction-column box" style="border: 2px solid #333; border-radius: 10px;">
   <div class="has-text-centered">
     <h1 class="title is-4 has-text-weight-bold">Game Library:</h1>
-    <div class="columns is-multiline">
+    <div class="columns is-multiline is-flex-wrap-wrap">
       {{#each games as |game|}}
       <div class="column is-half">
-        <div>
+        <div class="box">
           <a href="/dashboard/games/{{id}}">
             <img src="{{game_thumbnail}}">
           </a>
@@ -31,7 +31,7 @@
   </div>
 </div>
 
-<div class="columns is-flex is-flex-direction-column box">
+<div class="columns is-flex is-flex-direction-column box" style="border: 2px solid #333; border-radius: 10px; margin-bottom: 20px;">
   <div class="has-text-centered">
     <h1 class="title is-4 has-text-weight-bold">My Friends</h1>
     {{#each friends as |friend|}}
