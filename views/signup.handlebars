@@ -6,27 +6,35 @@
           <h1 class="title is-size-1 game-font">Welcome to GameShare</h1>
         </div>
       </div>
+       <form class="form signup-form">
       <div class="column has-text-centered mt-1 is-size-4">
         <p>Your all in one free-to-play game library & networking platform</p>
       </div>
       <div class="column">
-        <label for="name">Name</label>
-        <input class="input is-dark" type="text" placeholder="Ash Ketchum">
+        <label for="name">Username</label>
+        <input class="input is-dark" type="text" id="username-signup" placeholder="Username">
+        <p id="error" class="has-text-centered username-error"></p>
       </div>
       <div class="column">
         <label for="email">Email</label>
-        <input class="input is-dark" type="text" placeholder="ex. abc@gmail.com">
+        <input class="input is-dark" type="text" id="email-signup" placeholder="ex. abc@gmail.com">
+        <p id="error" class="has-text-centered email-error"></p>
       </div>
       <div class="column">
         <label for="Name">Password</label>
-        <input class="input is-dark" type="password" placeholder="5+ Characters">
+        <input class="input is-dark" type="password" id="password-signup" placeholder="5+ Characters">
+        <p id="error" class="has-text-centered password-error"></p>
       </div>
       <div class="column">
         <button class="button is-dark is-fullwidth" type="submit">Create an account</button>
+        <p id="error" class="has-text-centered signup-error"></p>
       </div>
       <div class="has-text-centered">
         <p>Already have an account? <a href="/login" class="has-text-danger">Login</a></p>
       </div>
+      </form>
     </div>
   </div>
 </div>
+
+<script src="/js/signup.js"></script>

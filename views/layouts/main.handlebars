@@ -14,6 +14,7 @@
 
 <body class="">
   <header>
+    {{#if loggedIn}}
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <h1 class="navbar-item title game-font is-4">GameShare</h1>
@@ -30,13 +31,14 @@
             Connect
           </a>
         </div>
-        <div class="navbar-item">
-          <button class="navbar-item" id="logout">
+        <div class="navbar-item ">
+          <button class="navbar-item button is-dark" id="logout">
             Logout
           </button>
         </div>
       </div>
     </nav>
+    {{/if}}
   </header>
 
   <main>
@@ -46,4 +48,7 @@
   </main>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </html>
+
+{{#if loggedIn}}
 <script src="/js/logout.js"></script>
+{{/if}}

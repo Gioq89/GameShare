@@ -39,7 +39,6 @@ router.get('/games/:id', withAuth, async (req, res) => {
     const userData = await User.findOne({
       where: {
         username: req.session.username,
-        // username: 'user1',
       },
       attributes: ['username'],
     });
@@ -59,6 +58,7 @@ router.get('/games/:id', withAuth, async (req, res) => {
       user,
       info,
       screenshots,
+      loggedIn: req.session.loggedIn,
     });
   } catch (error) {
     res.status(500).json(error);

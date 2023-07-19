@@ -3,7 +3,7 @@ const { User, Game, UserGames, Friend, UserFriends } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // CREATE new user and add user to friend table to assign friend id
-router.post('/', withAuth, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const dbUserData = await User.create({
       username: req.body.username,
@@ -27,8 +27,6 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
-// --------------------------------------------------------------------------
-// haven't added withAuth yet
 // GET all users
 router.get('/', withAuth, async (req, res) => {
   try {
@@ -165,7 +163,6 @@ router.post('/:username/add/:friend', withAuth, async (req, res) => {
     const user = await User.findOne({
       where: {
         username: req.session.username,
-        // username: req.params.username,
       },
       attributes: ['id', 'username'],
       include: {

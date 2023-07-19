@@ -144,7 +144,6 @@ router.post('/:username/add/:id', withAuth, async (req, res) => {
 
     const game = gameData.get({ plain: true });
 
-    // change to req.session.username
     const user = await User.findOne({
       where: {
         username: req.params.username,
