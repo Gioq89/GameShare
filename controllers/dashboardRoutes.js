@@ -38,8 +38,8 @@ router.get('/games/:id', withAuth, async (req, res) => {
     // // get username to associate who's library to add to if add game button is clicked
     const userData = await User.findOne({
       where: {
-        // username: req.session.username
-        username: 'user1',
+        username: req.session.username,
+        // username: 'user1',
       },
       attributes: ['username'],
     });

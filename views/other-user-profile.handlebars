@@ -1,7 +1,9 @@
 <div class="hero is-fullheight">
     <div class="container">
-        <h2 class="title has-text-centered">User Profile of {{username}}</h2>
+        <h2 class="title has-text-centered">{{username}}</h2>
         <div class="columns is-flex is-flex-direction-column box">
+            <p id="success" class="has-text-centered"></p>
+            <p id="error" class="has-text-centered"></p>
             <button id="add-friend" class="button is-dark is-fullwidth">Connect!</button>
             {{> profile-details}}
         <input type="hidden" id="your_username" value="{{user.username}}">

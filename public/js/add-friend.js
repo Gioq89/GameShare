@@ -21,12 +21,14 @@ const addFriendHandler = async (event) => {
 
     // if post data goes through, redirect the user to their own profile to see the game added
     if (response.ok) {
-      window.location.reload();
-      alert(`You have successfully connected with this user!`);
+      setTimeout(function () {
+        window.location.reload();
+      }, 3000);
+      $('#success').text(`You have successfully connected with this user!`);
     } else if (username === friend_username) {
-      alert('You cannot be friends with yourself!');
+      $('#error').text('You cannot be friends with yourself!');
     } else {
-      alert('You are already friends with this user!');
+      $('#error').text('You are already friends with this user!');
     }
   }
 };
