@@ -75,7 +75,6 @@ router.get('/:username', withAuth, async (req, res) => {
     const user = userData.get({ plain: true });
 
     // if the current session username matches the user profile, go to current user's profile (so they can instead see edit profile vs connect button)
-    // if (profile.username == req.session.username) {
     if (profile.username == user.username) {
       res.render('profile', {
         ...profile,
@@ -105,7 +104,6 @@ router.get('/edit/:username', withAuth, async (req, res) => {
     const profileData = await User.findOne({
       where: {
         username: req.session.username,
-        // username: req.params.username,
       },
       attributes: [
         'username',
@@ -119,6 +117,7 @@ router.get('/edit/:username', withAuth, async (req, res) => {
 
     res.render('updateProfile', {
       profile,
+      loggedIn: req.session.loggedIn,
     });
   } catch (error) {
     res.status(500).json(error);

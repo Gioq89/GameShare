@@ -5,7 +5,7 @@ const shuffle = require('shuffle-array');
 
 // --------------------------------------------------------------
 // GET the connect page for the website
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
   try {
     const usersData = await User.findAll({
       attributes: ['id', 'username', 'interestedGenre', 'preferredPlatform'],
@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
     // render the connect page to see other users
     res.render('connect', {
       users,
-      logged_in: req.session.logged_in,
+      loggedIn: req.session.loggedIn,
     });
   } catch (error) {
     res.status(500).json(error);
@@ -29,7 +29,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET the results from a search (either by platform or category)
-router.get('/search/:search', async (req, res) => {
+router.get('/search/:search', withAuth, async (req, res) => {
   try {
     const search = req.params.search;
     const results = req.query.results;
@@ -46,7 +46,7 @@ router.get('/search/:search', async (req, res) => {
       res.render('user-search-results', {
         users,
         search,
-        logged_in: req.session.logged_in,
+        loggedIn: req.session.loggedIn,
       });
     }
   } catch (error) {
