@@ -3,7 +3,7 @@ const { User, Game, UserGames, Friend, UserFriends } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // CREATE new user and add user to friend table to assign friend id
-router.post('/', async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
     const dbUserData = await User.create({
       username: req.body.username,
@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
 // --------------------------------------------------------------------------
 // haven't added withAuth yet
 // GET all users
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
   try {
     const userData = await User.findAll({
       attributes: { exclude: 'password' },
@@ -58,7 +58,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET a user by their username
-router.get('/:username', async (req, res) => {
+router.get('/:username', withAuth, async (req, res) => {
   try {
     const userData = await User.findOne({
       where: {
@@ -89,7 +89,7 @@ router.get('/:username', async (req, res) => {
 });
 
 // UPDATE current user's information (what genres they are interested in, the platform they play on, their bio)
-router.put('/:username', async (req, res) => {
+router.put('/:username', withAuth, async (req, res) => {
   try {
     const userData = await User.update(
       {
@@ -112,7 +112,7 @@ router.put('/:username', async (req, res) => {
 });
 
 // GET users by what their interested genre of game is
-router.get('/genre/:genre', async (req, res) => {
+router.get('/genre/:genre', withAuth, async (req, res) => {
   try {
     const userData = await User.findAll({
       where: {
@@ -129,7 +129,7 @@ router.get('/genre/:genre', async (req, res) => {
 });
 
 // GET users by what their preferred platform is
-router.get('/platform/:platform', async (req, res) => {
+router.get('/platform/:platform', withAuth, async (req, res) => {
   try {
     const userData = await User.findAll({
       where: {
@@ -146,7 +146,7 @@ router.get('/platform/:platform', async (req, res) => {
 });
 
 // POST a user to the current user's friends list
-router.post('/:username/add/:friend', async (req, res) => {
+router.post('/:username/add/:friend', withAuth, async (req, res) => {
   try {
     const friendData = await User.findOne({
       where: {
