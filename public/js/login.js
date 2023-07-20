@@ -22,7 +22,7 @@ const loginFormHandler = async (event) => {
   }
 };
 
-// login.js
+// login animation
 document.addEventListener("DOMContentLoaded", function () {
   const title = document.querySelector(".game-font");
 
