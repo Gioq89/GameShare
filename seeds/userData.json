@@ -1,47 +1,47 @@
 [
   {
     "id": 1,
-    "username": "user1",
+    "username": "user_one",
     "email": "one@email.com",
     "password": "gamer12345",
-    "interestedGenre": "shooter",
-    "preferredPlatform": "pc",
-    "aboutMe": "i love games"
+    "interestedGenre": "Shooter",
+    "preferredPlatform": "PC",
+    "aboutMe": "I love games"
   },
   {
     "id": 2,
-    "username": "user2",
+    "username": "user_two",
     "email": "two@email.com",
     "password": "gamer12345",
-    "interestedGenre": "shooter",
-    "preferredPlatform": "browser",
-    "aboutMe": "gaming is my passion"
+    "interestedGenre": "Survival",
+    "preferredPlatform": "PC",
+    "aboutMe": "Gaming is my passion"
   },
   {
     "id": 3,
-    "username": "user3",
+    "username": "user_three",
     "email": "three@email.com",
     "password": "gamer12345",
-    "interestedGenre": "sports",
-    "preferredPlatform": "pc",
-    "aboutMe": "gaming woohoo"
+    "interestedGenre": "Sports",
+    "preferredPlatform": "PC",
+    "aboutMe": "Gaming woohoo"
   },
   {
     "id": 4,
-    "username": "user4",
+    "username": "user_four",
     "email": "four@email.com",
     "password": "gamer12345",
-    "interestedGenre": "mmorpg",
-    "preferredPlatform": "pc",
-    "aboutMe": "games 4 life"
+    "interestedGenre": "Anime",
+    "preferredPlatform": "PC",
+    "aboutMe": "Games 4 life"
   },
   {
     "id": 5,
-    "username": "user5",
+    "username": "user_five",
     "email": "five@email.com",
     "password": "gamer12345",
-    "interestedGenre": "mmorpg",
-    "preferredPlatform": "browser",
-    "aboutMe": "i love free"
+    "interestedGenre": "Survival",
+    "preferredPlatform": "Console",
+    "aboutMe": "I love free"
   }
 ]

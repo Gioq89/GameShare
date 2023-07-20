@@ -4,6 +4,10 @@
     "user_id": 1
   },
   {
+    "game_id": 56,
+    "user_id": 1
+  },
+  {
     "game_id": 66,
     "user_id": 2
   },
@@ -13,10 +17,26 @@
   },
   {
     "game_id": 88,
-    "user_id": 2
+    "user_id": 3
+  },
+  {
+    "game_id": 89,
+    "user_id": 3
   },
   {
     "game_id": 99,
-    "user_id": 2
+    "user_id": 4
+  },
+  {
+    "game_id": 3,
+    "user_id": 4
+  },
+  {
+    "game_id": 5,
+    "user_id": 5
+  },
+  {
+    "game_id": 102,
+    "user_id": 5
   }
 ]
