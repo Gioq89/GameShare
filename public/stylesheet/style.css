@@ -3,13 +3,28 @@
     font-family: 'VT323', monospace;
   }
 
+.welcome-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Add some additional CSS to style the SVG */
+.title-svg {
+  overflow: visible;
+  position: relative;
+  transform: translateY(-50px); /* Push the SVG up a bit to align with the original text */
+}
+
 .game-font {
   font-family: 'Press Start 2P', cursive;
+  position: relative;
+  z-index: 1;
 }
 
 .landing-page-title {
   font-size: 9rem
 }
+
 
 #error {
   color: red;
