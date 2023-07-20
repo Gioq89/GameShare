@@ -3,8 +3,9 @@ const loginBtn = document.querySelector('#loginBtn');
 const loginFormHandler = async (event) => {
   event.preventDefault();
 
-  const email = document.querySelector('#email-login').value.trim();
-  const password = document.querySelector('#password-login').value.trim();
+const email = document.querySelector('#email-login').value.trim();
+const password = document.querySelector('#password-login').value.trim();
+
 
   if (email && password) {
     const response = await fetch('/api/login', {
@@ -23,6 +24,7 @@ const loginFormHandler = async (event) => {
 };
 
 // login animation
+
 document.addEventListener("DOMContentLoaded", function () {
   const title = document.querySelector(".game-font");
 
@@ -45,7 +47,16 @@ document.addEventListener("DOMContentLoaded", function () {
   drawAnimation.play();
 });
 
-
-
-
 loginBtn.addEventListener('click', loginFormHandler);
+
+document.querySelector('#email-login').addEventListener('keyup', (event) => {
+  if (event.keyCode === 13) {
+    loginFormHandler(event);
+  }
+});
+
+document.querySelector('#password-login').addEventListener('keyup', (event) => {
+  if (event.keyCode === 13) {
+    loginFormHandler(event);
+  }
+});
