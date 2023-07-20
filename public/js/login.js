@@ -22,8 +22,9 @@ const password = document.querySelector('#password-login').value.trim();
     }
   }
 };
-  
-// login.js
+
+// login animation
+
 document.addEventListener("DOMContentLoaded", function () {
   const title = document.querySelector(".game-font");
 
